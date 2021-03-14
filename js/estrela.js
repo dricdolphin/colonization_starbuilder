@@ -1,4 +1,3 @@
-
 /***
 function processa_estrelas(evento)
 -------------
@@ -12,6 +11,7 @@ function processa_estrelas(evento) {
  
 	let num_estrelas = document.getElementById("num_estrelas").value;
 	let pares = retorna_pares_unicos(dim_X,dim_Y,num_estrelas);
+	let estrelas = [];
 	let nomes_estrela = [];
 	let pares_string = "";
 	data_externa = [];
@@ -25,24 +25,44 @@ function processa_estrelas(evento) {
 		let string_y = element.split(",")[1];
 		let string_z = randomInt(0, dim_Z);
 		let tipo_estrela_string = tipo_estrela();
-		
+		estrelas.push(
+			{
+				nome: nome_estrela,
+				tipo: tipo_estrela_string,
+				X: string_x,
+				Y: string_y,
+				Z: string_z
+			}
+		);
 		pares_string = pares_string + "INSERT INTO colonization_estrela SET nome='" + nome_estrela + "', tipo='" + tipo_estrela_string +"', X="+ string_x + ", Y=" + string_y + ", Z=" + string_z +";<br>";
-		let string_style = 'point { size: ' + tamanho_estrela_em_pontos(tipo_estrela_string) + '; fill-color:' + cor_estrela_RGB(tipo_estrela_string)+ '; }';
-		let ponto_estrela = [
-			string_x*1, string_y*1, 
-			nome_estrela, 
-			string_style,
-			nome_estrela + ' (' + string_x + ',' + string_y + ',' + string_z + ')' + '\n' + tipo_estrela_string 
-			]
-		data_externa.push(ponto_estrela);
 	});
 	
 	//let ponto_estrela = [0, 0, 'Estrela', 'point { size: 1; fill-color: white; }', 'Estrela (0,0,0) \n Branca'];
 	//data_externa.push(ponto_estrela);
+	carrega_dados_estrela(estrelas);
 	drawChart();
 	document.getElementById("resultados").innerHTML = pares_string;
 	evento.preventDefault();
 }
+
+/***
+function carrega_dados_estrela(array_estrelas)
+
+Carrega os dados das estrelas na array que será usada pelo Google Charts
+***/
+function carrega_dados_estrela(array_estrelas) {
+	array_estrelas.forEach(element => {
+		let string_style = 'point { size: ' + tamanho_estrela_em_pontos(element.tipo) + '; fill-color:' + cor_estrela_RGB(element.tipo)+ '; }';
+		let ponto_estrela = [
+			element.X*1, element.Y*1, 
+			element.nome, 
+			string_style,
+			element.nome + ' (' + element.X + ',' + element.Y + ',' + element.Z + ')' + '\n' + element.tipo 
+		];
+		data_externa.push(ponto_estrela);
+	});
+}
+
 
 /***
 retorna_pares_unicos (x, y, num_pares)
