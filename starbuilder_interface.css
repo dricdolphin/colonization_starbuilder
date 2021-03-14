@@ -1,0 +1,72 @@
+* {
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+body {
+    font-family: Roboto, Helvetica, sans-serif;
+    font-size: 14px;
+    vertical-align: top;
+	background: #f0f0f1;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('fonts/Roboto-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url('fonts/Roboto-Bold.ttf');
+    font-weight: bold;
+}
+
+a:link {
+    color: mediumblue;
+    text-decoration: none;
+}
+
+a:visited {
+    color: mediumblue;
+    text-decoration: none;
+}
+
+a:hover {
+    color: darkblue;
+    text-decoration: none;
+}
+
+label {
+    /** display: block; **/
+    text-align: center;
+    font-weight: bold;
+}
+
+input[type=number] {
+	width: 40px;
+}
+
+div {
+	margin: 5px;
+}
+
+.dados {
+	max-width: 300px;
+}
+
+.titulo {
+	color: #FFF;
+	font-weight: bold;
+	padding: 5px;
+	background: #256db3;
+	border: 1px solid #054d98;
+	border-radius: 4px 4px 0px 0px;
+}
+
+.dimensoes {
+	margin-top: -5px;
+	padding: 5px;
+	border: 1px solid #054d98;
+	border-radius: 0px 0px 4px 4px;	
+}
